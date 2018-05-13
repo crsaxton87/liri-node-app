@@ -19,7 +19,7 @@ This will show the following information about the song in your terminal/bash wi
 If no song is provided, the program will default to "The Sign" by Ace of Base.
 
  `movie-this`
-*This will output the following information to your terminal/bash window:
+This will output the following information to your terminal/bash window:
 
     * Title of the movie.
     * Year the movie came out.
