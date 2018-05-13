@@ -5,10 +5,10 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI will be a comm
 
 ### Commands
 
-* `my-tweets`
+ `my-tweets`
 This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
-* `spotify-this-song`
+ `spotify-this-song`
 This will show the following information about the song in your terminal/bash window:
 
     * Artist(s)
@@ -18,7 +18,7 @@ This will show the following information about the song in your terminal/bash wi
     
 If no song is provided, the program will default to "The Sign" by Ace of Base.
 
-* `movie-this`
+ `movie-this`
 *This will output the following information to your terminal/bash window:
 
     * Title of the movie.
@@ -32,7 +32,7 @@ If no song is provided, the program will default to "The Sign" by Ace of Base.
 
 If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
-* `do-what-it-says`
+ `do-what-it-says`
 Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 
 ### Logging
