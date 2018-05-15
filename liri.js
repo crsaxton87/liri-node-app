@@ -31,7 +31,7 @@ var liri = function () {
         // Get request
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
             if (!error) {
-                log('');
+                log(new Date()+'\n');
                 for (i=0;i<20;i++) {
 
                     // Time and date tweeted
@@ -57,6 +57,7 @@ var liri = function () {
 
     // Spotify search
     if (cmd == 'spotify-this-song') {
+        log(new Date()+'\n');
         // If no query
         if (query == '""') {
             query = "the sign ace of base";
@@ -73,7 +74,7 @@ var liri = function () {
                     year = moment(data.tracks.items[0].album.release_date, 'YYYY-MM-DD').format('YYYY'),
                     songInfo = `Artist: ${artist}\nSong title: ${song}\nAlbum: ${album} (${year})\nPreview URL: ${url}`;
                 console.log(songInfo);
-                log(songInfo);
+                log(songInfo+'\n');
             }
         });
     }
@@ -101,7 +102,7 @@ var liri = function () {
                 `\nActors: ${JSON.parse(body).Actors}`; // Actors
 
                 console.log(movInfo);
-                log(movInfo);
+                log(`${new Date()}${movInfo}\n`);
             }    
         });           
     }
@@ -124,12 +125,15 @@ var liri = function () {
     // IP Check
     if (cmd == 'my-ip') {
         publicIp.v4().then(ip => {
-            console.log(`Your public IP is: ${ip}`);
+            var pubIp = `Your public IP is: ${ip}`;
+            console.log(pubIp);
             request(`http://api.ipstack.com/${ip}?access_key=${ipstack}`, function(error, response, body){
                 var city = JSON.parse(body).city,
                     region = JSON.parse(body).region_name,
                     country = JSON.parse(body).country_name;
-                console.log(`You are in ${city}, ${region}, ${country}`);
+                    message = `You are in ${city}, ${region}, ${country}`;
+                console.log(message);
+                log(`${new Date()}\n${pubIp}\n${message}\n`);
             });
         });
     }
@@ -159,7 +163,7 @@ var liri = function () {
 };
 
 var log = function (data) {
-    fs.appendFile('log.txt',`${cmd}, ${query}\n${data}`, function(err) {
+    fs.appendFile('log.txt',`\nInput: ${cmd}, ${query}\n${data}`, function(err) {
         if (err) {
             return console.log(err);
         }
