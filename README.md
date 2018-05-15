@@ -35,5 +35,11 @@ If the user doesn't type a movie in, the program will output data for the movie 
  `do-what-it-says`
 Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 
+`my-ip`
+Returns your public IP and city / state.
+
+`magic-trick`
+A true magician never reveals their secrets.
+
 ### Logging
 In addition to logging the data to your terminal/bash window, LIRI will output the data to a .txt file called `log.txt`.

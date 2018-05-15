@@ -5,13 +5,18 @@ require("dotenv").config();
 var Twitter = require('twitter'),
     Spotify = require('node-spotify-api'),
     request = require('request'),
-    fs = require('fs');
+    fs = require('fs'),
+    publicIp = require('public-ip'),
+    brightness = require('brightness'),
+    wallpaper = require('wallpaper'),
+    inquirer = require('inquirer'),
     moment = require('moment');
 
 // Key variables
 var keys = require('./keys.js'),
     spotify = new Spotify(keys.spotify),
-    client = new Twitter(keys.twitter);
+    client = new Twitter(keys.twitter),
+    ipstack = keys.ipstack.key;
 
 // Input variables
 var input = process.argv,
@@ -113,6 +118,42 @@ var liri = function () {
             query = data.split(',')[1];
             // Run LIRI again with new data
             liri();
+        });
+    }
+
+    // IP Check
+    if (cmd == 'my-ip') {
+        publicIp.v4().then(ip => {
+            console.log(`Your public IP is: ${ip}`);
+            request(`http://api.ipstack.com/${ip}?access_key=${ipstack}`, function(error, response, body){
+                var city = JSON.parse(body).city,
+                    region = JSON.parse(body).region_name,
+                    country = JSON.parse(body).country_name;
+                console.log(`You are in ${city}, ${region}, ${country}`);
+            });
+        });
+    }
+
+    // Magic Trick
+    if (cmd == 'magic-trick') {
+        inquirer.prompt([
+            {
+                type: 'confirm',
+                message: 'Would you like to see a magic trick?',
+                name: 'magic'
+            }
+        ])
+        .then(function(response) {
+            console.log('Nothing up my sleeves...');
+            setTimeout(() => {
+                brightness.set(0);
+                setTimeout(() => {
+                    wallpaper.set('wall.jpg').then(() => {
+                        console.log('Ta-dah! Did you see the trick?');
+                        brightness.set(1.0);
+                    });                    
+                }, 1000);
+            }, 2000);
         });
     }
 };

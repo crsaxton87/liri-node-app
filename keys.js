@@ -9,3 +9,7 @@ exports.spotify = {
   id: process.env.SPOTIFY_ID,
   secret: process.env.SPOTIFY_SECRET
 };
+
+exports.ipstack = {
+  key: 'ad6f58a72691e7c7bf3809f971bfe8ba'
+};

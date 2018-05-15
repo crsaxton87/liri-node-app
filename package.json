@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/crsaxton87/liri-node-app#readme",
   "dependencies": {
+    "brightness": "^3.0.0",
     "dotenv": "^5.0.1",
+    "inquirer": "^5.2.0",
     "moment": "^2.22.1",
     "node-spotify-api": "^1.0.7",
+    "public-ip": "^2.4.0",
     "request": "^2.85.0",
-    "twitter": "^1.7.1"
+    "twitter": "^1.7.1",
+    "wallpaper": "^3.0.0"
   }
 }
