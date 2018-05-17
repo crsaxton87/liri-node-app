@@ -31,6 +31,7 @@ var liri = function () {
         // Get request
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
             if (!error) {
+                // Log date
                 log(new Date()+'\n');
                 for (i=0;i<20;i++) {
 
@@ -42,6 +43,7 @@ var liri = function () {
                     var tweetText = "\t"+tweets[i].text;
                     console.log(tweetText);
 
+                    // Log tweets
                     fs.appendFile('log.txt', `${tweetTime}\n${tweetText}\n`, function(err) {
                         if (err) {
                             return console.log(err);
@@ -57,11 +59,13 @@ var liri = function () {
 
     // Spotify search
     if (cmd == 'spotify-this-song') {
+        // Log date
         log(new Date()+'\n');
         // If no query
         if (query == '""') {
             query = "the sign ace of base";
         }
+        // Spotify module query
         spotify.search({ type: 'track', query: query }, function(err, data) {
             if (err) {
             return console.log('Error occurred: ' + err);
@@ -74,6 +78,7 @@ var liri = function () {
                     year = moment(data.tracks.items[0].album.release_date, 'YYYY-MM-DD').format('YYYY'),
                     songInfo = `Artist: ${artist}\nSong title: ${song}\nAlbum: ${album} (${year})\nPreview URL: ${url}`;
                 console.log(songInfo);
+                // Log song info
                 log(songInfo+'\n');
             }
         });
@@ -102,6 +107,7 @@ var liri = function () {
                 `\nActors: ${JSON.parse(body).Actors}`; // Actors
 
                 console.log(movInfo);
+                // Log movie info
                 log(`${new Date()}${movInfo}\n`);
             }    
         });           
@@ -133,6 +139,7 @@ var liri = function () {
                     country = JSON.parse(body).country_name;
                     message = `You are in ${city}, ${region}, ${country}`;
                 console.log(message);
+                // Log IP info
                 log(`${new Date()}\n${pubIp}\n${message}\n`);
             });
         });
@@ -150,18 +157,21 @@ var liri = function () {
         .then(function(response) {
             console.log('Nothing up my sleeves...');
             setTimeout(() => {
+                // Turn off screen
                 brightness.set(0);
+                // Wait, set wallpaper, then turn screen back on
                 setTimeout(() => {
                     wallpaper.set('wall.jpg').then(() => {
                         console.log('Ta-dah! Did you see the trick?');
                         brightness.set(1.0);
                     });                    
-                }, 1000);
+                }, 2000);
             }, 2000);
         });
     }
 };
 
+// Logging function
 var log = function (data) {
     fs.appendFile('log.txt',`\nInput: ${cmd}, ${query}\n${data}`, function(err) {
         if (err) {
@@ -170,5 +180,6 @@ var log = function (data) {
     });
 };
 
+// Initial run
 liri();
 
